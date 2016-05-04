@@ -1,5 +1,5 @@
 
-angular.module("app", ["angularDc", "angularJade"])
+angular.module("app", ["angularDc"])
 .controller('myController', function($scope) {
     d3.csv("ndx.csv", function (data) {
         /* since its a csv file we need to format the data a bit */
