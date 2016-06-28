@@ -14,12 +14,18 @@
 	<script type="text/javascript" src="content.js"></script>
 </head>
 <body ng-app="app">
-<!-- we nicely separate the view and the data. Here, all information concerning the way to display the data
-is in the template -->
-<div ng-controller="myController" dc-chart="pieChart" dc-chart-group="1"
-     dc-width="780" dc-height="480" dc-inner-radius="100"
-     dc-slices-cap="4"
-     dc-dimension="byWeek" dc-group="volumeByWeekGroup"
-     dc-legend="dc.legend()"></div>
+    <div ng-controller="myController" dc-chart="barChart" dc-chart-group="1"
+        dc-width="780" dc-height="480"
+        dc-dimension="byWeek" dc-group="volumeByWeekGroup"
+        dc-x="d3.time.scale()" dc-x-units="d3.time.weeks"
+        dc-gap="1" dc-center-bar="true" dc-elastic-x="true" dc-on-renderlet="drawLineOnBarGraph">
+    </div>
+
+    <div ng-controller="myController" dc-chart="pieChart" dc-chart-group="1"
+        dc-width="780" dc-height="480" dc-inner-radius="100"
+        dc-slices-cap="4"
+        dc-dimension="byWeek" dc-group="volumeByWeekGroup"
+        dc-legend="dc.legend()">
+    </div>
 </body>
 </html>
