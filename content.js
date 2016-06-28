@@ -24,6 +24,8 @@ angular.module("app", ["angularDc"])
         path.attr('d', line);
     }
 
+    $scope.countAccessor = function(d) {return d.value.count;}
+
         // in the controller, we only keep data modeling (or better, delegate to a service)
     d3.csv("testdata.csv", function(error, data) {
         var dateFormat = d3.time.format("%Y-%m-%d");
@@ -42,6 +44,28 @@ angular.module("app", ["angularDc"])
         $scope.byWeek = nData.dimension(function (d) {
             return d.week;
         });
+
+        $scope.teuVolumeAndAvgPricePerWeekGroup = $scope.byWeek.group().reduce(
+            function addElement(p, v) {
+                p.count += v.teuQuantity;
+                p.sum += v.teuPrice * v.teuQuantity;
+                p.avg = p.sum / p.count;
+                return p;
+            },
+            function removeElement(p, v){
+                p.count -= v.teuQuantity;
+                p.sum -= v.teuPrice * v.teuQuantity;
+                if (p.count > 0) {
+                    p.avg = p.sum / p.count;
+                } else {
+                    return {count:0, avg:0, sum:0};
+                }
+                return p;
+            },
+            function initElement(p, v) {
+                return {count:0, avg:0, sum:0};
+            }
+        );
 
         $scope.volumeByWeekGroup = $scope.byWeek.group().reduceSum(function (d) {
             return d.teuQuantity;
