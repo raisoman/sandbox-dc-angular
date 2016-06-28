@@ -70,7 +70,7 @@
                 .legend(dc.legend().x(70).y(10).itemHeight(13).gap(5))
                 .brushOn(false)
                 .compose([
-                    dc.lineChart(moveChart)
+                    dc.barChart(moveChart)
                             .group(indexAvgByMonthGroup, "Monthly Index Average")
                             .valueAccessor(function (d) {
                                 return d.value.avg;
