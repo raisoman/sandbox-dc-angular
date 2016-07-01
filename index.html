@@ -14,12 +14,12 @@
 	<script type="text/javascript" src="content.js"></script>
 </head>
 <body ng-app="app">
+    <div id="weekly-volume-chart"></div>
     <div ng-controller="myController" dc-chart="barChart" dc-chart-group="1"
         dc-width="780" dc-height="480"
-        dc-dimension="byWeek" dc-group="teuVolumeAndAvgPricePerWeekGroup"
+        dc-dimension="byWeek" dc-group="volumeByWeekGroup"
         dc-x="d3.time.scale()" dc-x-units="d3.time.weeks"
-        dc-gap="1" dc-center-bar="true" dc-elastic-x="true" dc-on-renderlet="drawLineOnBarGraph"
-        dc-value-accessor="countAccessor">
+        dc-gap="1" dc-center-bar="true" dc-elastic-x="true">
     </div>
 
     <div ng-controller="myController" dc-chart="pieChart" dc-chart-group="1"

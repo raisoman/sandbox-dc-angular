@@ -69,6 +69,7 @@
                 .renderHorizontalGridLines(true)
                 .legend(dc.legend().x(70).y(10).itemHeight(13).gap(5))
                 .brushOn(false)
+                ._rangeBandPadding(1)
                 .compose([
                     dc.barChart(moveChart)
                             .group(indexAvgByMonthGroup, "Monthly Index Average")
