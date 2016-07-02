@@ -95,5 +95,6 @@ angular.module("app", ["angularDc"])
             .xAxis().ticks(4);
         }
 
+        $scope.$apply();
     });
 });
