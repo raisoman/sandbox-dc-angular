@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>dc.js - Nasdaq Example</title>
+    <title>NYSHEX Dashboard Prototype</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="bower_components/dcjs/dc.css"/>
     <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
@@ -17,49 +17,11 @@
 <body ng-app="app">
 <div class="container" ng-controller="myController">
 
-    <h2> Nasdaq 100 Index 1985/11/01-2012/06/29</h2>
-    <row>
-        <div class="col-xs-3 dc-chart" dc-chart="pieChart"
-                dc-width="180"
-                dc-height="180"
-                dc-radius="80"
-                dc-dimension="gainOrLoss"
-                dc-group="gainOrLossGroup">
-            <strong> Days by Gain/Loss</strong>
-            <a class="reset">reset</div>
-            <div class=clearfix><div>
-        </div>
-
-        <div class="col-xs-3 dc-chart" dc-chart="pieChart"
-                dc-width="180"
-                dc-height="180"
-                dc-radius="80"
-                dc-inner-radius="30"
-                dc-dimension="quarter"
-                dc-group="quarterGroup">
-            <strong> Quarters</strong>
-            <a class="reset">reset</div>
-            <div class=clearfix><div>
-        </div>
-        <div class="col-xs-3 dc-chart" dc-chart="rowChart"
-                dc-width="180"
-                dc-height="180"
-                dc-margins="{top: 20, left: 10, right: 10, bottom: 20}"
-                dc-group="dayOfWeekGroup"
-                dc-dimension="dayOfWeek"
-                dc-ordinal-colors="['#3182bd', '#6baed6', '#9ecae1', '#c6dbef', '#dadaeb']"
-                dc-elastic-x="true"
-                dc-post-setup-chart="dayOfWeekPostSetupChart"
-                >
-            <strong>Day of Week</strong>
-            <a class="reset">reset</div>
-            <div class=clearfix><div>
-        </div>
-    </row>
+    <h2>NYSHEX Dashboard Prototype</h2>
     <row>
         <div dc-chart="compositeChart"
             dc-width="990" dc-height="200"
-            dc-dimension="moveMonths"
+            dc-dimension="byWeek"
             dc-x-units="d3.time.weeks"
             dc-elastic-x="true" dc-post-setup-chart="compositePostSetup"
             dc-mouse-zoomable="false" dc-brush-on="false"
@@ -73,15 +35,53 @@
                 dc-width="990"
                 dc-height="40"
                 dc-margins="{top: 0, right: 50, bottom: 20, left: 40}"
-                dc-dimension="moveMonths"
-                dc-group="volumeByMonthGroup"
+                dc-dimension="byWeek"
+                dc-group="volumeByWeekGroup"
                 dc-center-bar="true"
                 dc-gap="Date(1985, 0, 1)"
-                dc-x="d3.time.scale().domain([Date(1985, 0, 1), Date(2012, 11, 31)])"
+                dc-x="d3.time.scale()"
+                dc-post-setup-chart="barChartPostSetup"
                 dc-round="d3.time.month.round"
                 dc-always-use-rounding="true"
                 dc-x-units="d3.time.months">
         <p class="pull-right"> select a time range to zoom in</p>
+        </div>
+    </row>
+    <row>
+        <div class="col-xs-3 dc-chart" dc-chart="pieChart"
+                dc-width="180"
+                dc-height="180"
+                dc-radius="80"
+                dc-inner-radius="30"
+                dc-dimension="containerOrigin"
+                dc-group="containerOriginGroup">
+            <strong>Origin</strong>
+            <a class="reset">reset</div>
+            <div class=clearfix><div>
+        </div>
+        <div class="col-xs-3 dc-chart" dc-chart="pieChart"
+                dc-width="180"
+                dc-height="180"
+                dc-radius="80"
+                dc-dimension="containerType"
+                dc-group="containerTypeGroup">
+            <strong>Container Type</strong>
+            <a class="reset">reset</div>
+            <div class=clearfix><div>
+        </div>
+        <div class="col-xs-3 dc-chart" dc-chart="rowChart"
+                dc-width="180"
+                dc-height="180"
+                dc-margins="{top: 20, left: 10, right: 10, bottom: 20}"
+                dc-group="containerTypeGroup"
+                dc-dimension="containerType"
+                dc-ordinal-colors="['#3182bd', '#6baed6', '#9ecae1', '#c6dbef', '#dadaeb']"
+                dc-elastic-x="true"
+                dc-post-setup-chart="containerTypePostSetupChart"
+                >
+            <strong>Day of Week</strong>
+            <a class="reset">reset</div>
+            <div class=clearfix><div>
         </div>
     </row>
 </div>
