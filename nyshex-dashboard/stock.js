@@ -59,7 +59,7 @@ angular.module("app", ["angularDc"])
         $scope.containerDestination = nData.dimension(function (d) {
             return d.destinationCode;
         });
-        $scope.containerOriginGroup = $scope.containerOrigin.group();
+        $scope.containerDestinationGroup = $scope.containerDestination.group();
 
         $scope.compositePostSetup = function(chart, options){
             chart.compose([
