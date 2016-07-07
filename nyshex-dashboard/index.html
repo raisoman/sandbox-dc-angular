@@ -40,10 +40,10 @@
                 dc-center-bar="true"
                 dc-gap="Date(1985, 0, 1)"
                 dc-x="d3.time.scale()"
-                dc-post-setup-chart="barChartPostSetup"
                 dc-round="d3.time.month.round"
                 dc-always-use-rounding="true"
-                dc-x-units="d3.time.months">
+                dc-post-setup-chart="volumeChartPostSetup"
+                dc-x-units="d3.time.weeks">
         <p class="pull-right"> select a time range to zoom in</p>
         </div>
     </row>
@@ -63,9 +63,10 @@
                 dc-width="180"
                 dc-height="180"
                 dc-radius="80"
+                dc-inner-radius="30"
                 dc-dimension="containerDestination"
                 dc-group="containerDestinationGroup">
-            <strong>Container Type</strong>
+            <strong>Origin</strong>
             <a class="reset">reset</div>
             <div class=clearfix><div>
         </div>
@@ -79,9 +80,19 @@
                 dc-elastic-x="true"
                 dc-post-setup-chart="containerTypePostSetupChart"
                 >
-            <strong>Day of Week</strong>
+            <strong>Container Type</strong>
             <a class="reset">reset</div>
-            <div class=clearfix><div>
+        </div>
+        <div class="col-xs-3 dc-chart" dc-chart="barChart"
+                dc-width="990"
+                dc-height="180"
+                dc-margins="{top: 20, left: 10, right: 10, bottom: 20}"
+                dc-dimension="byWeek"
+                dc-elastic-x="true"
+                dc-post-setup-chart="carrierAllocationPostSetup"
+                >
+            <strong>Container Type</strong>
+            <a class="reset">reset</div>
         </div>
     </row>
 </div>

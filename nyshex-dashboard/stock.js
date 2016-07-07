@@ -68,7 +68,7 @@ angular.module("app", ["angularDc"])
                     .valueAccessor(function (d) {
                         return d.value;
                     })
-                    .gap(1)
+                    .gap(2)
                     .centerBar(true),
                 dc.lineChart(chart)
                     .group($scope.avgPricePerWeekGroup, "Weekly average price")
@@ -81,9 +81,6 @@ angular.module("app", ["angularDc"])
             chart.x(d3.time.scale().domain([$scope.byWeek.bottom(1)[0].dd, $scope.byWeek.top(1)[0].dd]))
             chart.legend(dc.legend().x(70).y(10).itemHeight(13).gap(5))
         }
-        $scope.barChartPostSetup = function(chart, options) {
-            chart.x(d3.time.scale().domain([$scope.byWeek.bottom(1)[0].dd, $scope.byWeek.top(1)[0].dd]))
-        }
 
         $scope.containerTypePostSetupChart = function(c) {
             c.label(function(d) {
@@ -95,6 +92,23 @@ angular.module("app", ["angularDc"])
             .xAxis().ticks(4);
         }
 
+        $scope.volumeChartPostSetup = function(chart, options) {
+            chart.x(d3.time.scale().domain([$scope.byWeek.bottom(1)[0].dd, $scope.byWeek.top(1)[0].dd]))
+            chart.yAxis().ticks(0);
+        }
+
+        $scope.carrierAllocationPostSetup = function(chart, options) {
+            chart.x(d3.time.scale().domain([$scope.byWeek.bottom(1)[0].dd, $scope.byWeek.top(1)[0].dd]))
+            var originStackComponents = {};
+            var origins = d3.map(data, function(d){return d.originCode;}).keys();
+                origins.forEach(function(originCode) {
+                originStackComponents[originCode] = $scope.byWeek.group().reduceSum(function (d) {
+                    return d.originCode == originCode?  d.teuQuantity : 0;
+                });
+                chart.group(originStackComponents[originCode]);
+                chart.stack(originStackComponents[originCode]);
+            });
+        }
         $scope.$apply();
     });
 });
