@@ -15,9 +15,12 @@
     <script type="text/javascript" src="stock.js"></script>
 </head>
 <body ng-app="app">
-<div class="container" ng-controller="myController">
+<div class="container" ng-controller="myController" id="dashboardPrintArea">
 
     <h2>NYSHEX Dashboard Prototype</h2>
+     <button type="button" class="btn btn-primary" ng-click="printDiv('dashboardPrintArea');">
+                    <span class="glyphicon glyphicon-print" aria-hidden="true"></span> Print
+    </button>
     <row>
         <div dc-chart="compositeChart"
             dc-width="990" dc-height="200"

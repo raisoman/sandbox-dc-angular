@@ -109,6 +109,38 @@ angular.module("app", ["angularDc"])
                 chart.stack(originStackComponents[originCode]);
             });
         }
+
+        $scope.printDiv = function(divName) {
+            //collect the styles in order for the printed child to inherit them
+            var parentStyleSheets = document.styleSheets;
+            var cssString = "";
+            for (var i = 0, count = parentStyleSheets.length; i < count; ++i) {
+                if (parentStyleSheets[i].cssRules) {
+                    var cssRules = parentStyleSheets[i].cssRules;
+                    for (var j = 0, countJ = cssRules.length; j < countJ; ++j)
+                        cssString += cssRules[j].cssText;
+                }
+                else
+                    cssString += parentStyleSheets[i].cssText;  // IE8 and earlier
+            }
+            var style = document.createElement("style");
+            style.type = "text/css";
+            try {
+                style.innerHTML = cssString;
+            }
+            catch (ex) {
+                style.styleSheet.cssText = cssString;  // IE8 and earlier
+            }
+
+            var printContents = document.getElementById(divName).innerHTML;
+            var popupWin = window.open('', '_blank', 'width=300,height=300');
+            popupWin.document.open();
+            popupWin.document.write('<html><head></head><body onload="window.print()">' + printContents + '</body></html>');
+            popupWin.document.getElementsByTagName("head")[0].appendChild(style);
+            popupWin.document.close();
+
+            }
+
         $scope.$apply();
     });
 });
