@@ -93,14 +93,12 @@ d3.csv("./bower_components/dcjs/web/examples/morley.csv", function(error, experi
             if (!range_chart.filter()) {
                 dc.events.trigger(function () {
                     _this._focusCharts.forEach(function(focus_chart) {
-                    console.log('resetting or something');
                         focus_chart.x().domain(focus_chart.xOriginalDomain());
                     });
                 });
             } else _this._focusCharts.forEach(function(focus_chart) {
                 if (!rangesEqual(range_chart.filter(), focus_chart.filter())) {
                     dc.events.trigger(function () {
-                        console.log('focusing or something');
                         focus_chart.focus(range_chart.filter());
                     });
                 }
