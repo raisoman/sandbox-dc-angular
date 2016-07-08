@@ -3,8 +3,8 @@
 <head>
     <title>NYSHEX Dashboard Prototype</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="bower_components/dcjs/dc.css"/>
-    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="bower_components/dcjs/dc.css"></link>
+    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css"></link>
     <script type="text/javascript" src="bower_components/lodash/dist/lodash.min.js"></script>
     <script type="text/javascript" src="bower_components/d3/d3.min.js"></script>
     <script type="text/javascript" src="bower_components/crossfilter/crossfilter.min.js"></script>
@@ -15,25 +15,27 @@
     <script type="text/javascript" src="stock.js"></script>
 </head>
 <body ng-app="app">
-<div class="container" ng-controller="myController" id="dashboardPrintArea">
+<div class="container container-fluid" ng-controller="myController" id="dashboardPrintArea">
 
     <h2>NYSHEX Dashboard Prototype</h2>
-     <button type="button" class="btn btn-primary" ng-click="printDiv('dashboardPrintArea');">
-                    <span class="glyphicon glyphicon-print" aria-hidden="true"></span> Print
+    <button type="button" class="btn btn-primary" ng-click="printDiv('dashboardPrintArea');">
+        <span class="glyphicon glyphicon-print" aria-hidden="true"></span> Print
     </button>
-    <row>
+    <div class="row">
         <div dc-chart="compositeChart"
-            dc-width="990" dc-height="200"
-            dc-dimension="byWeek"
-            dc-x-units="d3.time.weeks"
-            dc-elastic-x="true" dc-post-setup-chart="compositePostSetup"
-            dc-mouse-zoomable="false" dc-brush-on="false"
-            dc-range-chart="volumeChart"
-            dc-y-axis-label="'Weekly volume'" dc-right-y-axis-label="'Weekly average price'">
+                dc-width="990" dc-height="200"
+                dc-dimension="byWeek"
+                dc-x-units="d3.time.weeks"
+                dc-elastic-x="true" dc-post-setup-chart="compositePostSetup"
+                dc-mouse-zoomable="false" dc-brush-on="false"
+                dc-range-chart="volumeChart"
+                dc-y-axis-label="'Weekly volume'" dc-right-y-axis-label="'Weekly average price'">
+            <div>
+            </div>
         </div>
-    </row>
-    <row>
-      <div class="dc-chart" dc-chart="barChart"
+    </div>
+    <div class="row">
+        <div class="dc-chart" dc-chart="barChart"
                 dc-name="'volumeChart'"
                 dc-width="990"
                 dc-height="40"
@@ -43,38 +45,40 @@
                 dc-center-bar="true"
                 dc-gap="Date(1985, 0, 1)"
                 dc-x="d3.time.scale()"
-                dc-round="d3.time.month.round"
+                dc-round="d3.time.week.round"
                 dc-always-use-rounding="true"
                 dc-post-setup-chart="volumeChartPostSetup"
                 dc-x-units="d3.time.weeks">
-        <p class="pull-right"> select a time range to zoom in</p>
+            <div>
+                <p class="pull-right"> select a time range to zoom in</p>
+            </div>
         </div>
-    </row>
-    <row>
-        <div class="col-xs-3 dc-chart" dc-chart="pieChart"
+    </div>
+    <div class="row">
+        <div class="col-xs-4 dc-chart" dc-chart="pieChart"
                 dc-width="180"
                 dc-height="180"
                 dc-radius="80"
                 dc-inner-radius="30"
                 dc-dimension="containerOrigin"
                 dc-group="containerOriginGroup">
-            <strong>Origin</strong>
-            <a class="reset">reset</div>
-            <div class=clearfix><div>
+            <div>
+                <strong>Origin</strong>
+            </div>
         </div>
-        <div class="col-xs-3 dc-chart" dc-chart="pieChart"
+        <div class="col-xs-4 dc-chart" dc-chart="pieChart"
                 dc-width="180"
                 dc-height="180"
                 dc-radius="80"
                 dc-inner-radius="30"
                 dc-dimension="containerDestination"
                 dc-group="containerDestinationGroup">
-            <strong>Origin</strong>
-            <a class="reset">reset</div>
-            <div class=clearfix><div>
+            <div>
+                <strong>Destination</strong>
+            </div>
         </div>
-        <div class="col-xs-3 dc-chart" dc-chart="rowChart"
-                dc-width="180"
+        <div class="col-xs-4 dc-chart" dc-chart="rowChart"
+                    dc-width="180"
                 dc-height="180"
                 dc-margins="{top: 20, left: 10, right: 10, bottom: 20}"
                 dc-group="containerTypeGroup"
@@ -83,10 +87,13 @@
                 dc-elastic-x="true"
                 dc-post-setup-chart="containerTypePostSetupChart"
                 >
-            <strong>Container Type</strong>
-            <a class="reset">reset</div>
+            <div>
+                <strong>Container Type</strong>
+            </div>
         </div>
-        <div class="col-xs-3 dc-chart" dc-chart="barChart"
+    </div>
+    <div class="row">
+        <div class="dc-chart" dc-chart="barChart"
                 dc-width="990"
                 dc-height="180"
                 dc-margins="{top: 20, left: 10, right: 10, bottom: 20}"
@@ -94,13 +101,13 @@
                 dc-elastic-x="true"
                 dc-post-setup-chart="carrierAllocationPostSetup"
                 >
-            <strong>Container Type</strong>
-            <a class="reset">reset</div>
+            <div>
+                <strong>Carrier allocation</strong>
+            </div>
         </div>
-    </row>
+    </div>
+
 </div>
 </body>
-<script type="text/coffee">
-
 </html>
 
