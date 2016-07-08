@@ -101,13 +101,20 @@ angular.module("app", ["angularDc"])
             chart.x(d3.time.scale().domain([$scope.byWeek.bottom(1)[0].dd, $scope.byWeek.top(1)[0].dd]))
             var originStackComponents = {};
             var origins = d3.map(data, function(d){return d.originCode;}).keys();
-                origins.forEach(function(originCode) {
-                originStackComponents[originCode] = $scope.byWeek.group().reduceSum(function (d) {
-                    return d.originCode == originCode?  d.teuQuantity : 0;
-                });
-                chart.group(originStackComponents[originCode]);
-                chart.stack(originStackComponents[originCode]);
+            var originGroup0 = $scope.byWeek.group().reduceSum(function (d) {
+                return d.originCode == origins[0]?  d.teuQuantity : 0;
             });
+            chart.group(originGroup0);
+            for(var i = 1; i <origins.length; ++i) {
+                var originCode = origins[i];
+                //get the actual value of originCode instead of the closure variable
+                var originStackComponent = (function (originCodeInstance) {
+                    return $scope.byWeek.group().reduceSum(function (d) {
+                        return d.originCode == originCodeInstance?  d.teuQuantity : 0;
+                    });
+                })(originCode);
+                chart.stack(originStackComponent);
+            };
         }
 
         $scope.printDiv = function(divName) {
@@ -138,8 +145,7 @@ angular.module("app", ["angularDc"])
             popupWin.document.write('<html><head></head><body onload="window.print()">' + printContents + '</body></html>');
             popupWin.document.getElementsByTagName("head")[0].appendChild(style);
             popupWin.document.close();
-
-            }
+        }
 
         $scope.$apply();
     });
