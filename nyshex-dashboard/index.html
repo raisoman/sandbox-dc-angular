@@ -93,7 +93,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="dc-chart" dc-chart="barChart"
+        <div class="dc-chart" dc-chart="compositeChart"
                 dc-width="990"
                 dc-height="180"
                 dc-margins="{top: 20, left: 10, right: 10, bottom: 20}"
@@ -106,6 +106,18 @@
             </div>
         </div>
     </div>
+    <row>
+        <div dc-chart="compositeChart"
+            dc-width="990" dc-height="200"
+            dc-dimension="byWeek"
+            dc-x-units="d3.time.weeks"
+            dc-range-chart="volumeChart"
+            dc-elastic-x="true" dc-post-setup-chart="carrierAllocationPostSetup"
+            dc-mouse-zoomable="false" dc-brush-on="false"
+            >
+        </div>
+    </row>
+
 
 </div>
 </body>
