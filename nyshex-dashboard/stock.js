@@ -147,8 +147,10 @@ angular.module("app", ["angularDc"])
             var barChart = dc.barChart(chart)
                     .group($scope.volumeByWeekGroup)
 
+            barChart.colors(d3.scale.category20c());
             var originStackComponents = {};
             var origins = d3.map(data, function(d){return d.originCode;}).keys();
+            origins.sort();
             var originGroup0 = $scope.byWeek.group().reduceSum(function (d) {
                 return d.originCode == origins[0]?  d.teuQuantity : 0;
             });
